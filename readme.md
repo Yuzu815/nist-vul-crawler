@@ -1,6 +1,6 @@
 # NIST National Vulnerability Database Crawler
 
-This is a crawler that crawls code snippets with explanations from "https://nvd.nist.gov/vuln/categories" by category
+This is a crawler that crawls code snippets with explanations from https://nvd.nist.gov/vuln/categories by category
 to make it easier to build datasets and test LLM models.
 
 ## Components
@@ -28,6 +28,10 @@ it contains vulnerabilities, code snippets and so on. Among them, `fetch_data/*.
 classification, `debug.jsonl` records the data captured throughout the process, and `dataset.json` is the dataset that
 takes the code snippet as input and whether it contains vulnerabilities with the vulnerability explanation as output.
 
+Example:
+
+*debug.jsonl*
+
 ```json
 {
   "source": [
@@ -42,6 +46,15 @@ takes the code snippet as input and whether it contains vulnerabilities with the
   "cwe_id": "CWE-312",
   "example_id": "3",
   "explanation": "The following code attempts to establish a connection, read in a password, then store it to a buffer.While successful, the program does not encrypt the data before writing it to a buffer, possibly exposing it to unauthorized actors."
+}
+```
+
+*dataset.jsonl*
+
+```json
+{
+  "input": "server.sin_family = AF_INET; hp = gethostbyname(argv[1]);if (hp==NULL) error(\"Unknown host\");memcpy( (char *)&server.sin_addr,(char *)hp->h_addr,hp->h_length);if (argc < 3) port = 80;else port = (unsigned short)atoi(argv[3]);server.sin_port = htons(port);if (connect(sock, (struct sockaddr *)&server, sizeof server) < 0) error(\"Connecting\");...while ((n=read(sock,buffer,BUFSIZE-1))!=-1) {\n\nwrite(dfd,password_buffer,n);...",
+  "output": "This program snippet has a vulnerability.The following code attempts to establish a connection, read in a password, then store it to a buffer.While successful, the program does not encrypt the data before writing it to a buffer, possibly exposing it to unauthorized actors."
 }
 ```
 
