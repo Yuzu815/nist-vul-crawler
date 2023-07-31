@@ -1,13 +1,14 @@
+import os
 import socket
 
-import socks
-import os
 import pandas as pd
+import socks
 from bs4 import BeautifulSoup
+
 from utils import *
 
 # You can set this up here if you need to use a proxy to access the website (Sock5).
-socks.set_default_proxy(socks.SOCKS5, "127.0.0.1", 23333) # IP and Port
+socks.set_default_proxy(socks.SOCKS5, "127.0.0.1", 23333)  # IP and Port
 socket.socket = socks.socksocket
 
 
