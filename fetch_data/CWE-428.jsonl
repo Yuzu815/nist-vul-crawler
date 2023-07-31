@@ -1,0 +1,4 @@
+{
+  "input": "UINT errCode = WinExec( \"C:\\\\Program Files\\\\Foo\\\\Bar\", SW_SHOW );",
+  "output": "This program snippet has a vulnerability.The following example demonstrates the weakness."
+}

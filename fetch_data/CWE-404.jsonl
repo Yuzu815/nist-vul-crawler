@@ -1,0 +1,20 @@
+{
+  "input": "private void processFile(string fName){BufferReader fil = new BufferReader(new FileReader(fName));String line;while ((line = fil.ReadLine()) != null){processLine(line);}}",
+  "output": "This program snippet has a vulnerability.The following method never closes the new file handle. Given enough time, the Finalize() method for BufferReader should eventually call Close(), but there is no guarantee as to how long this action will take. In fact, there is no guarantee that Finalize() will ever be invoked. In a busy environment, the Operating System could use up all of the available file handles before the Close() function is called.The good code example simply adds an explicit call to the Close() function when the system is done using the file. Within a simple example such as this the problem is easy to see and fix. In a real system, the problem may be considerably more obscure."
+}
+{
+  "input": "try {Connection con = DriverManager.getConnection(some_connection_string);}catch ( Exception e ) {log( e );}",
+  "output": "This program snippet has a vulnerability.This code attempts to open a connection to a database and catches any exceptions that may occur.If an exception occurs after establishing the database connection and before the same connection closes, the pool of database connections may become exhausted. If the number of available connections is exceeded, other users cannot access this resource, effectively denying access to the application."
+}
+{
+  "input": "int decodeFile(char* fName) {\nchar buf[BUF_SZ];FILE* f = fopen(fName, \"r\");if (!f) {printf(\"cannot open %s\\n\", fName);return DECODE_FAIL;}else {\nwhile (fgets(buf, BUF_SZ, f)) {if (!checkChecksum(buf)) {return DECODE_FAIL;}else {decodeBlock(buf);}}\n}fclose(f);return DECODE_SUCCESS;\n}",
+  "output": "This program snippet has a vulnerability.The following C function does not close the file handle it opens if an error occurs. If the process is long-lived, the process can run out of file handles."
+}
+{
+  "input": "class A {void foo();};void A::foo(){int *ptr;ptr = (int*)malloc(sizeof(int));delete ptr;}",
+  "output": "This program snippet has a vulnerability.In this example, the program does not use matching functions such as malloc/free, new/delete, and new[]/delete[] to allocate/deallocate the resource."
+}
+{
+  "input": "class A{void foo(bool);};void A::foo(bool heap) {int localArray[2] = {11,22};int *p = localArray;if (heap){p = new int[2];}delete[] p;}",
+  "output": "This program snippet has a vulnerability.In this example, the program calls the delete[] function on non-heap memory."
+}

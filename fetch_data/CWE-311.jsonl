@@ -1,0 +1,8 @@
+{
+  "input": "server.sin_family = AF_INET; hp = gethostbyname(argv[1]);if (hp==NULL) error(\"Unknown host\");memcpy( (char *)&server.sin_addr,(char *)hp->h_addr,hp->h_length);if (argc < 3) port = 80;else port = (unsigned short)atoi(argv[3]);server.sin_port = htons(port);if (connect(sock, (struct sockaddr *)&server, sizeof server) < 0) error(\"Connecting\");...while ((n=read(sock,buffer,BUFSIZE-1))!=-1) {\n\nwrite(dfd,password_buffer,n);...",
+  "output": "This program snippet has a vulnerability.The following code attempts to establish a connection, read in a password, then store it to a buffer.While successful, the program does not encrypt the data before writing it to a buffer, possibly exposing it to unauthorized actors."
+}
+{
+  "input": "try {URL u = new URL(\"http://www.secret.example.org/\");HttpURLConnection hu = (HttpURLConnection) u.openConnection();hu.setRequestMethod(\"PUT\");hu.connect();OutputStream os = hu.getOutputStream();hu.disconnect();}catch (IOException e) {\n\n\n//...\n\n\n}",
+  "output": "This program snippet has a vulnerability.The following code attempts to establish a connection to a site to communicate sensitive information.Though a connection is successfully made, the connection is unencrypted and it is possible that all sensitive data sent to or received from the server will be read by unintended actors."
+}

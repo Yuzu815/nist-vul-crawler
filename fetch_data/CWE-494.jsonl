@@ -1,0 +1,4 @@
+{
+  "input": "URL[] classURLs= new URL[]{new URL(\"file:subdir/\")};URLClassLoader loader = new URLClassLoader(classURLs);Class loadedClass = Class.forName(\"loadMe\", true, loader);",
+  "output": "This program snippet has a vulnerability.This example loads an external class from a local subdirectory.This code does not ensure that the class loaded is the intended one, for example by verifying the class's checksum. An attacker may be able to modify the class file to execute malicious code."
+}

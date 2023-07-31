@@ -1,0 +1,20 @@
+{
+  "input": "...Properties prop = new Properties();prop.load(new FileInputStream(\"config.properties\"));String password = prop.getProperty(\"password\");DriverManager.getConnection(url, usr, password);...",
+  "output": "This program snippet has a vulnerability.The following code reads a password from a properties file and uses the password to connect to a database.This code will run successfully, but anyone who has access to config.properties can read the value of password. If a devious employee has access to this information, they can use it to break into the system."
+}
+{
+  "input": "...String password = regKey.GetValue(passKey).toString();NetworkCredential netCred = new NetworkCredential(username,password,domain);...",
+  "output": "This program snippet has a vulnerability.The following code reads a password from the registry and uses the password to create a new network credential.This code will run successfully, but anyone who has access to the registry key used to store the password can read the value of password. If a devious employee has access to this information, they can use it to break into the system"
+}
+{
+  "input": "int VerifyAdmin(char *password) {if (strcmp(compress(password), compressed_password)) {printf(\"Incorrect Password!\\n\");return(0);}printf(\"Entering Diagnostic Mode...\\n\");return(1);}",
+  "output": "This program snippet has a vulnerability.Both of these examples verify a password by comparing it to a stored compressed version.Because a compression algorithm is used instead of a one way hashing algorithm, an attacker can recover compressed passwords stored in the database."
+}
+{
+  "input": "int VerifyAdmin(String password) {if (passwd.Equals(compress(password), compressed_password)) {return(0);}\n//Diagnostic Mode\nreturn(1);}",
+  "output": "This program snippet has a vulnerability.Both of these examples verify a password by comparing it to a stored compressed version.Because a compression algorithm is used instead of a one way hashing algorithm, an attacker can recover compressed passwords stored in the database."
+}
+{
+  "input": "# Java Web App ResourceBundle properties file\n...webapp.ldap.username=secretUsernamewebapp.ldap.password=secretPassword...",
+  "output": "This program snippet has a vulnerability.The following examples show a portion of properties and configuration files for Java and ASP.NET applications. The files include username and password information but they are stored in cleartext.This Java example shows a properties file with a cleartext username / password pair.The following example shows a portion of a configuration file for an ASP.Net application. This configuration file includes username and password information for a connection to a database but the pair is stored in cleartext.Username and password information should not be included in a configuration file or a properties file in cleartext as this will allow anyone who can read the file access to the resource. If possible, encrypt this information."
+}

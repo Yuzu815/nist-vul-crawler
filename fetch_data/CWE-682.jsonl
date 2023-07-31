@@ -1,0 +1,12 @@
+{
+  "input": "img_t table_ptr; /*struct containing img data, 10kB each*/int num_imgs;...num_imgs = get_num_imgs();table_ptr = (img_t*)malloc(sizeof(img_t)*num_imgs);...",
+  "output": "This program snippet has a vulnerability.The following image processing code allocates a table for images.This code intends to allocate a table of size num_imgs, however as num_imgs grows large, the calculation determining the size of the list will eventually overflow (CWE-190). This will result in a very small list to be allocated instead. If the subsequent code operates on the list as if it were num_imgs long, it may result in many types of out-of-bounds problems (CWE-119)."
+}
+{
+  "input": "...int touchdowns = team.getTouchdowns();int yardsGained = team.getTotalYardage();System.out.println(team.getName() + \" averages \" + yardsGained / touchdowns + \"yards gained for every touchdown scored\");...",
+  "output": "This program snippet has a vulnerability.This code attempts to calculate a football team's average number of yards gained per touchdown.The code does not consider the event that the team they are querying has not scored a touchdown, but has gained yardage. In that case, we should expect an ArithmeticException to be thrown by the JVM. This could lead to a loss of availability if our error handling code is not set up correctly."
+}
+{
+  "input": "int *p = x;char * second_char = (char *)(p + 1);",
+  "output": "This program snippet has a vulnerability.This example attempts to calculate the position of the second byte of a pointer.In this example, second_char is intended to point to the second byte of p. But, adding 1 to p actually adds sizeof(int) to p, giving a result that is incorrect (3 bytes off on 32-bit platforms). If the resulting memory address is read, this could potentially be an information leak. If it is a write, it could be a security-critical write to unauthorized memory-- whether or not it is a buffer overflow. Note that the above code may also be wrong in other ways, particularly in a little endian environment."
+}

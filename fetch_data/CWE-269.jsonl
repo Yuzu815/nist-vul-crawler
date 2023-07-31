@@ -1,0 +1,20 @@
+{
+  "input": "def makeNewUserDir(username):\nif invalidUsername(username):\n\n\n#avoid CWE-22 and CWE-78 \nprint('Usernames cannot contain invalid characters')return False\n\ntry:raisePrivileges()os.mkdir('/home/' + username)lowerPrivileges()\nexcept OSError:print('Unable to create new user directory for user:' + username)return False\nreturn True",
+  "output": "This program snippet has a vulnerability.This code temporarily raises the program's privileges to allow creation of a new user folder.While the program only raises its privilege level to create the folder and immediately lowers it again, if the call to os.mkdir() throws an exception, the call to lowerPrivileges() will not occur. As a result, the program is indefinitely operating in a raised privilege state, possibly allowing further exploitation to occur."
+}
+{
+  "input": "seteuid(0);\n/* do some stuff */\n\nseteuid(getuid());",
+  "output": "This program snippet has a vulnerability.The following example demonstrates the weakness."
+}
+{
+  "input": "AccessController.doPrivileged(new PrivilegedAction() {\npublic Object run() {\n// privileged code goes here, for example:\nSystem.loadLibrary(\"awt\");return null;\n// nothing to return\n\n}",
+  "output": "This program snippet has a vulnerability.The following example demonstrates the weakness."
+}
+{
+  "input": "public enum Roles {ADMIN,USER,GUEST}\npublic void printDebugInfo(User requestingUser){\nif(isAuthenticated(requestingUser)){\nswitch(requestingUser.role){\ncase GUEST:System.out.println(\"You are not authorized to perform this command\");break;\ndefault:System.out.println(currentDebugState());break;\n\n}\n}else{System.out.println(\"You must be logged in to perform this command\");}\n}",
+  "output": "This program snippet has a vulnerability.This code intends to allow only Administrators to print debug information about a system.While the intention was to only allow Administrators to print the debug information, the code as written only excludes those with the role of \"GUEST\". Someone with the role of \"ADMIN\" or \"USER\" will be allowed access, which goes against the original intent. An attacker may be able to use this debug information to craft an attack on the system."
+}
+{
+  "input": "public enum Roles {ADMIN,OPERATOR,USER,GUEST}\npublic void resetPassword(User requestingUser, User user, String password ){\nif(isAuthenticated(requestingUser)){\nswitch(requestingUser.role){\ncase GUEST:System.out.println(\"You are not authorized to perform this command\");break;\ncase USER:System.out.println(\"You are not authorized to perform this command\");break;\ndefault:setPassword(user,password);break;}\n}\n\nelse{System.out.println(\"You must be logged in to perform this command\");}\n}",
+  "output": "This program snippet has a vulnerability.This code allows someone with the role of \"ADMIN\" or \"OPERATOR\" to reset a user's password. The role of \"OPERATOR\" is intended to have less privileges than an \"ADMIN\", but still be able to help users with small issues such as forgotten passwords.This code does not check the role of the user whose password is being reset. It is possible for an Operator to gain Admin privileges by resetting the password of an Admin account and taking control of that account."
+}

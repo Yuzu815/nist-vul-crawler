@@ -1,0 +1,12 @@
+{
+  "input": "#include <stdio.h>\nvoid printWrapper(char *string) {\n\nprintf(string);\n}\nint main(int argc, char **argv) {\n\nchar buf[5012];memcpy(buf, argv[1], 5012);printWrapper(argv[1]);return (0);\n}",
+  "output": "This program snippet has a vulnerability.The following program prints a string provided as an argument.The example is exploitable, because of the call to printf() in the printWrapper() function. Note: The stack buffer was added to make exploitation more simple."
+}
+{
+  "input": "int main(int argc, char **argv){char buf[128];...snprintf(buf,128,argv[1]);}",
+  "output": "This program snippet has a vulnerability.The following code copies a command line argument into a buffer using snprintf().This code allows an attacker to view the contents of the stack and write to the stack using a command line argument containing a sequence of formatting directives. The attacker can read from the stack by providing more formatting directives, such as %x, than the function takes as arguments to be formatted. (In this example, the function takes no arguments to be formatted.) By using the %n formatting directive, the attacker can write to the stack, causing snprintf() to write the number of bytes output thus far to the specified argument (rather than reading a value from the argument, which is the intended behavior). A sophisticated version of this attack will use four staggered writes to completely control the value of a pointer on the stack."
+}
+{
+  "input": "printf(\"%d %d %1$d %1$d\\n\", 5, 9);",
+  "output": "This program snippet has a vulnerability.Certain implementations make more advanced attacks even easier by providing format directives that control the location in memory to read from or write to. An example of these directives is shown in the following code, written for glibc:This code produces the following output: 5 9 5 5 It is also possible to use half-writes (%hn) to accurately control arbitrary DWORDS in memory, which greatly reduces the complexity needed to execute an attack that would otherwise require four staggered writes, such as the one mentioned in the first example."
+}

@@ -1,0 +1,12 @@
+{
+  "input": "response.addCookie( new Cookie(\"userAccountID\", acctID);",
+  "output": "This program snippet has a vulnerability.The following code excerpt stores a plaintext user account ID in a browser cookie.Because the account ID is in plaintext, the user's account information is exposed if their computer is compromised by an attacker."
+}
+{
+  "input": "server.sin_family = AF_INET; hp = gethostbyname(argv[1]);if (hp==NULL) error(\"Unknown host\");memcpy( (char *)&server.sin_addr,(char *)hp->h_addr,hp->h_length);if (argc < 3) port = 80;else port = (unsigned short)atoi(argv[3]);server.sin_port = htons(port);if (connect(sock, (struct sockaddr *)&server, sizeof server) < 0) error(\"Connecting\");...while ((n=read(sock,buffer,BUFSIZE-1))!=-1) {\n\nwrite(dfd,password_buffer,n);...",
+  "output": "This program snippet has a vulnerability.The following code attempts to establish a connection, read in a password, then store it to a buffer.While successful, the program does not encrypt the data before writing it to a buffer, possibly exposing it to unauthorized actors."
+}
+{
+  "input": "# Java Web App ResourceBundle properties file\n...webapp.ldap.username=secretUsernamewebapp.ldap.password=secretPassword...",
+  "output": "This program snippet has a vulnerability.The following examples show a portion of properties and configuration files for Java and ASP.NET applications. The files include username and password information but they are stored in cleartext.This Java example shows a properties file with a cleartext username / password pair.The following example shows a portion of a configuration file for an ASP.Net application. This configuration file includes username and password information for a connection to a database but the pair is stored in cleartext.Username and password information should not be included in a configuration file or a properties file in cleartext as this will allow anyone who can read the file access to the resource. If possible, encrypt this information."
+}

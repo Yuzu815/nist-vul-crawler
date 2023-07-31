@@ -1,0 +1,4 @@
+{
+  "input": "File f = new File(downloadedFilePath);JarFile jf = new JarFile(f);",
+  "output": "This program snippet has a vulnerability.In the following code, a JarFile object is created from a downloaded file.The JAR file that was potentially downloaded from an untrusted source is created without verifying the signature (if present). An alternate constructor that accepts a boolean verify parameter should be used instead."
+}

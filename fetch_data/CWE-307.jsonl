@@ -1,0 +1,8 @@
+{
+  "input": "String username = request.getParameter(\"username\");String password = request.getParameter(\"password\");\nint authResult = authenticateUser(username, password);",
+  "output": "This program snippet has a vulnerability.The following code, extracted from a servlet's doPost() method, performs an authentication lookup every time the servlet is invoked.However, the software makes no attempt to restrict excessive authentication attempts."
+}
+{
+  "input": "int validateUser(char *host, int port){\nint socket = openSocketConnection(host, port);if (socket < 0) {printf(\"Unable to open socket connection\");return(FAIL);}\nint isValidUser = 0;char username[USERNAME_SIZE];char password[PASSWORD_SIZE];\nwhile (isValidUser == 0) {\nif (getNextMessage(socket, username, USERNAME_SIZE) > 0) {if (getNextMessage(socket, password, PASSWORD_SIZE) > 0) {isValidUser = AuthenticateUser(username, password);}}\n}return(SUCCESS);\n}",
+  "output": "This program snippet has a vulnerability.In the following C/C++ example the validateUser method opens a socket connection, reads a username and password from the socket and attempts to authenticate the username and password.The validateUser method will continuously check for a valid username and password without any restriction on the number of authentication attempts made. The method should limit the number of authentication attempts made to prevent brute force attacks as in the following example code."
+}

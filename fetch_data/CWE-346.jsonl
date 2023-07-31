@@ -1,0 +1,8 @@
+{
+  "input": "IntentFilter filter = new IntentFilter(\"com.example.RemoveUser\");MyReceiver receiver = new MyReceiver();registerReceiver(receiver, filter);\npublic class DeleteReceiver extends BroadcastReceiver {@Overridepublic void onReceive(Context context, Intent intent) {int userID = intent.getIntExtra(\"userID\");destroyUserData(userID);}}",
+  "output": "This program snippet has a vulnerability.This Android application will remove a user account when it receives an intent to do so:This application does not check the origin of the intent, thus allowing any malicious application to remove a user. Always check the origin of an intent, or create an allowlist of trusted applications using the manifest.xml file."
+}
+{
+  "input": "// Android\n@Overridepublic boolean shouldOverrideUrlLoading(WebView view, String url){\nif (url.substring(0,14).equalsIgnoreCase(\"examplescheme:\")){if(url.substring(14,25).equalsIgnoreCase(\"getUserInfo\")){writeDataToView(view, UserData);return false;}else{return true;}}\n}",
+  "output": "This program snippet has a vulnerability.These Android and iOS applications intercept URL loading within a WebView and perform special actions if a particular URL scheme is used, thus allowing the Javascript within the WebView to communicate with the application:A call into native code can then be initiated by passing parameters within the URL:Because the application does not check the source, a malicious website loaded within this WebView has the same access to the API as a trusted site."
+}

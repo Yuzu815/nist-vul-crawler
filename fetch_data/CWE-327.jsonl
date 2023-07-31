@@ -1,0 +1,8 @@
+{
+  "input": "EVP_des_ecb();",
+  "output": "This program snippet has a vulnerability.These code examples use the Data Encryption Standard (DES).Once considered a strong algorithm, DES now regarded as insufficient for many applications. It has been replaced by Advanced Encryption Standard (AES)."
+}
+{
+  "input": "Cipher des=Cipher.getInstance(\"DES...\");des.initEncrypt(key2);",
+  "output": "This program snippet has a vulnerability.These code examples use the Data Encryption Standard (DES).Once considered a strong algorithm, DES now regarded as insufficient for many applications. It has been replaced by Advanced Encryption Standard (AES)."
+}

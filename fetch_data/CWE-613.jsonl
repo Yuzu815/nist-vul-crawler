@@ -1,0 +1,4 @@
+{
+  "input": "<web-app>\n[...snipped...]\n<session-config><session-timeout>-1</session-timeout></session-config>\n</web-app>",
+  "output": "This program snippet has a vulnerability.The following snippet was taken from a J2EE web.xml deployment descriptor in which the session-timeout parameter is explicitly defined (the default value depends on the container). In this case the value is set to -1, which means that a session will never expire."
+}

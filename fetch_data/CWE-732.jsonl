@@ -1,0 +1,4 @@
+{
+  "input": "#define OUTFILE \"hello.out\"\numask(0);FILE *out;\n/* Ignore link following (CWE-59) for brevity */ \n\nout = fopen(OUTFILE, \"w\");if (out) {fprintf(out, \"hello world!\\n\");fclose(out);}",
+  "output": "This program snippet has a vulnerability.The following code sets the umask of the process to 0 before creating a file and writing \"Hello world\" into the file.After running this program on a UNIX system, running the \"ls -l\" command might return the following output:The \"rw-rw-rw-\" string indicates that the owner, group, and world (all users) can read the file and write to it."
+}

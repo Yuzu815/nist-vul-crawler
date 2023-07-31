@@ -1,0 +1,4 @@
+{
+  "input": "void f(pthread_mutex_t *mutex) {\npthread_mutex_lock(mutex);\n\n/* access shared resource */\n\n\npthread_mutex_unlock(mutex);\n}",
+  "output": "This program snippet has a vulnerability.The following function attempts to acquire a lock in order to perform operations on a shared resource.However, the code does not check the value returned by pthread_mutex_lock() for errors. If pthread_mutex_lock() cannot acquire the mutex for any reason, the function may introduce a race condition into the program and result in undefined behavior.In order to avoid data races, correctly written programs must check the result of thread synchronization functions and appropriately handle all errors, either by attempting to recover from them or reporting them to higher levels."
+}

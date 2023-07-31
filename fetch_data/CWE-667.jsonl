@@ -1,0 +1,12 @@
+{
+  "input": "private long someLongValue;public long getLongValue() {return someLongValue;}\npublic void setLongValue(long l) {someLongValue = l;}",
+  "output": "This program snippet has a vulnerability.In the following Java snippet, methods are defined to get and set a long field in an instance of a class that is shared across multiple threads. Because operations on double and long are nonatomic in Java, concurrent access may cause unexpected behavior. Thus, all operations on long and double fields should be synchronized."
+}
+{
+  "input": "void f(pthread_mutex_t *mutex) {\npthread_mutex_lock(mutex);\n\n/* access shared resource */\n\n\npthread_mutex_unlock(mutex);\n}",
+  "output": "This program snippet has a vulnerability.The following function attempts to acquire a lock in order to perform operations on a shared resource.However, the code does not check the value returned by pthread_mutex_lock() for errors. If pthread_mutex_lock() cannot acquire the mutex for any reason, the function may introduce a race condition into the program and result in undefined behavior.In order to avoid data races, correctly written programs must check the result of thread synchronization functions and appropriately handle all errors, either by attempting to recover from them or reporting them to higher levels."
+}
+{
+  "input": "if (helper == null) {\nsynchronized (this) {if (helper == null) {helper = new Helper();}}\n}return helper;",
+  "output": "This program snippet has a vulnerability.It may seem that the following bit of code achieves thread safety while avoiding unnecessary synchronization...The programmer wants to guarantee that only one Helper() object is ever allocated, but does not want to pay the cost of synchronization every time this code is called.Suppose that helper is not initialized. Then, thread A sees that helper==null and enters the synchronized block and begins to execute:If a second thread, thread B, takes over in the middle of this call and helper has not finished running the constructor, then thread B may make calls on helper while its fields hold incorrect values."
+}

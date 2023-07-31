@@ -1,0 +1,20 @@
+{
+  "input": "if ((cert = SSL_get_peer_certificate(ssl)) && host)foo=SSL_get_verify_result(ssl);\nif ((X509_V_OK==foo) || X509_V_ERR_SELF_SIGNED_CERT_IN_CHAIN==foo))\n\n\n// certificate looks good, host can be trusted",
+  "output": "This program snippet has a vulnerability.This code checks the certificate of a connected peer.In this case, because the certificate is self-signed, there was no external authority that could prove the identity of the host. The program could be communicating with a different system that is spoofing the host, e.g. by poisoning the DNS cache or using an Adversary-in-the-Middle (AITM) attack to modify the traffic from server to client."
+}
+{
+  "input": "cert = SSL_get_peer_certificate(ssl);if (cert && (SSL_get_verify_result(ssl)==X509_V_OK)) {\n\n\n// do secret things\n\n\n}",
+  "output": "This program snippet has a vulnerability.The following OpenSSL code obtains a certificate and verifies it.Even though the \"verify\" step returns X509_V_OK, this step does not include checking the Common Name against the name of the host. That is, there is no guarantee that the certificate is for the desired host. The SSL connection could have been established with a malicious host that provided a valid certificate."
+}
+{
+  "input": "if (cert = SSL_get_peer(certificate(ssl)) {\nfoo=SSL_get_verify_result(ssl);if ((X509_V_OK==foo) || (X509_V_ERR_CERT_HAS_EXPIRED==foo))\n\n\n//do stuff",
+  "output": "This program snippet has a vulnerability.The following OpenSSL code ensures that there is a certificate and allows the use of expired certificates.If the call to SSL_get_verify_result() returns X509_V_ERR_CERT_HAS_EXPIRED, this means that the certificate has expired. As time goes on, there is an increasing chance for attackers to compromise the certificate."
+}
+{
+  "input": "if (cert = SSL_get_peer_certificate(ssl)) {\n\n\n// got a certificate, do secret things",
+  "output": "This program snippet has a vulnerability.The following OpenSSL code ensures that there is a certificate before continuing execution.Because this code does not use SSL_get_verify_results() to check the certificate, it could accept certificates that have been revoked (X509_V_ERR_CERT_REVOKED). The software could be communicating with a malicious host."
+}
+{
+  "input": "if (cert = SSL_get_peer_certificate(ssl)) {\n\n\n// got certificate, host can be trusted\n\n\n//foo=SSL_get_verify_result(ssl);\n\n\n//if (X509_V_OK==foo) ...\n\n\n}",
+  "output": "This program snippet has a vulnerability.The following OpenSSL code ensures that the host has a certificate.Note that the code does not call SSL_get_verify_result(ssl), which effectively disables the validation step that checks the certificate."
+}

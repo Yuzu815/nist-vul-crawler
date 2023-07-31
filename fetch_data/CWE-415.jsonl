@@ -1,0 +1,8 @@
+{
+  "input": "char* ptr = (char*)malloc (SIZE);...if (abrt) {free(ptr);}...free(ptr);",
+  "output": "This program snippet has a vulnerability.The following code shows a simple example of a double free vulnerability.Double free vulnerabilities have two common (and sometimes overlapping) causes:\n\n\nError conditions and other exceptional circumstances\n\n\nConfusion over which part of the program is responsible for freeing the memory\n\n\nAlthough some double free vulnerabilities are not much more complicated than this example, most are spread out across hundreds of lines of code or even different files. Programmers seem particularly susceptible to freeing global variables more than once."
+}
+{
+  "input": "#include <stdio.h>#include <unistd.h>#define BUFSIZE1 512#define BUFSIZE2 ((BUFSIZE1/2) - 8)\nint main(int argc, char **argv) {char *buf1R1;char *buf2R1;char *buf1R2;buf1R1 = (char *) malloc(BUFSIZE2);buf2R1 = (char *) malloc(BUFSIZE2);free(buf1R1);free(buf2R1);buf1R2 = (char *) malloc(BUFSIZE1);strncpy(buf1R2, argv[1], BUFSIZE1-1);free(buf2R1);free(buf1R2);}",
+  "output": "This program snippet has a vulnerability.While contrived, this code should be exploitable on Linux distributions that do not ship with heap-chunk check summing turned on."
+}

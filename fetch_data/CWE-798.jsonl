@@ -1,0 +1,24 @@
+{
+  "input": "...DriverManager.getConnection(url, \"scott\", \"tiger\");...",
+  "output": "This program snippet has a vulnerability.The following code uses a hard-coded password to connect to a database:This is an example of an external hard-coded password on the client-side of a connection. This code will run successfully, but anyone who has access to it will have access to the password. Once the program has shipped, there is no going back from the database user \"scott\" with a password of \"tiger\" unless the program is patched. A devious employee with access to this information can use it to break into the system. Even worse, if attackers have access to the bytecode for application, they can use the javap -c command to access the disassembled code, which will contain the values of the passwords used. The result of this operation might look something like the following for the example above:"
+}
+{
+  "input": "int VerifyAdmin(char *password) {\nif (strcmp(password, \"Mew!\")) {\n\n                                 printf(\"Incorrect Password!\\n\");return(0)\n}printf(\"Entering Diagnostic Mode...\\n\");return(1);\n}",
+  "output": "This program snippet has a vulnerability.The following code is an example of an internal hard-coded password in the back-end:Every instance of this program can be placed into diagnostic mode with the same password. Even worse is the fact that if this program is distributed as a binary-only distribution, it is very difficult to change that password or disable this \"functionality.\""
+}
+{
+  "input": "int VerifyAdmin(String password) {if (!password.equals(\"Mew!\")) {return(0)}//Diagnostic Modereturn(1);}",
+  "output": "This program snippet has a vulnerability.The following code is an example of an internal hard-coded password in the back-end:Every instance of this program can be placed into diagnostic mode with the same password. Even worse is the fact that if this program is distributed as a binary-only distribution, it is very difficult to change that password or disable this \"functionality.\""
+}
+{
+  "input": "int VerifyAdmin(char *password) {\nif (strcmp(password,\"68af404b513073584c4b6f22b6c63e6b\")) {\n\nprintf(\"Incorrect Password!\\n\");return(0);\n}printf(\"Entering Diagnostic Mode...\\n\");return(1);\n}",
+  "output": "This program snippet has a vulnerability.The following code examples attempt to verify a password using a hard-coded cryptographic key.The cryptographic key is within a hard-coded string value that is compared to the password. It is likely that an attacker will be able to read the key and compromise the system."
+}
+{
+  "input": "public boolean VerifyAdmin(String password) {if (password.equals(\"68af404b513073584c4b6f22b6c63e6b\")) {System.out.println(\"Entering Diagnostic Mode...\");return true;}System.out.println(\"Incorrect Password!\");return false;",
+  "output": "This program snippet has a vulnerability.The following code examples attempt to verify a password using a hard-coded cryptographic key.The cryptographic key is within a hard-coded string value that is compared to the password. It is likely that an attacker will be able to read the key and compromise the system."
+}
+{
+  "input": "# Java Web App ResourceBundle properties file\n...webapp.ldap.username=secretUsernamewebapp.ldap.password=secretPassword...",
+  "output": "This program snippet has a vulnerability.The following examples show a portion of properties and configuration files for Java and ASP.NET applications. The files include username and password information but they are stored in cleartext.This Java example shows a properties file with a cleartext username / password pair.The following example shows a portion of a configuration file for an ASP.Net application. This configuration file includes username and password information for a connection to a database but the pair is stored in cleartext.Username and password information should not be included in a configuration file or a properties file in cleartext as this will allow anyone who can read the file access to the resource. If possible, encrypt this information."
+}

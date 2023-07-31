@@ -1,0 +1,12 @@
+{
+  "input": "void host_lookup(char *user_supplied_addr){\nstruct hostent *hp;in_addr_t *addr;char hostname[64];in_addr_t inet_addr(const char *cp);\n\n/*routine that ensures user_supplied_addr is in the right format for conversion */\n\nvalidate_addr_form(user_supplied_addr);addr = inet_addr(user_supplied_addr);hp = gethostbyaddr( addr, sizeof(struct in_addr), AF_INET);strcpy(hostname, hp->h_name);\n}",
+  "output": "This program snippet has a vulnerability.This example takes an IP address from a user, verifies that it is well formed and then looks up the hostname and copies it into a buffer.If an attacker provides an address that appears to be well-formed, but the address does not resolve to a hostname, then the call to gethostbyaddr() will return NULL. Since the code does not check the return value from gethostbyaddr (CWE-252), a NULL pointer dereference (CWE-476) would then occur in the call to strcpy(). Note that this code is also vulnerable to a buffer overflow (CWE-119)."
+}
+{
+  "input": "String cmd = System.getProperty(\"cmd\");cmd = cmd.trim();",
+  "output": "This program snippet has a vulnerability.In the following code, the programmer assumes that the system always has a property named \"cmd\" defined. If an attacker can control the program's environment so that \"cmd\" is not defined, the program throws a NULL pointer exception when it attempts to call the trim() method."
+}
+{
+  "input": "...\nIntentFilter filter = new IntentFilter(\"com.example.URLHandler.openURL\");MyReceiver receiver = new MyReceiver();registerReceiver(receiver, filter);\n...\n\npublic class UrlHandlerReceiver extends BroadcastReceiver {\n@Overridepublic void onReceive(Context context, Intent intent) {\nif(\"com.example.URLHandler.openURL\".equals(intent.getAction())) {String URL = intent.getStringExtra(\"URLToOpen\");int length = URL.length();\n\n...\n}\n}\n}",
+  "output": "This program snippet has a vulnerability.This Android application has registered to handle a URL when sent an intent:The application assumes the URL will always be included in the intent. When the URL is not present, the call to getStringExtra() will return null, thus causing a null pointer exception when length() is called."
+}

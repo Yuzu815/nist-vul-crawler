@@ -1,0 +1,4 @@
+{
+  "input": "public String preventXSS(String input, String mask) {return input.replaceAll(\"script\", mask);}",
+  "output": "This program snippet has a vulnerability.In the following example, an XSS neutralization method intends to replace script tags in user-supplied input with a safe equivalent:The code only works when the \"script\" tag is in all lower-case, forming an incomplete denylist (CWE-184). Equivalent tags such as \"SCRIPT\" or \"ScRiPt\" will not be neutralized by this method, allowing an XSS attack."
+}

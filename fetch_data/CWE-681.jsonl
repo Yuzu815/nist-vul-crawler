@@ -1,0 +1,12 @@
+{
+  "input": "int i = (int) 33457.8f;",
+  "output": "This program snippet has a vulnerability.In the following Java example, a float literal is cast to an integer, thus causing a loss of precision."
+}
+{
+  "input": "unsigned int readdata () {int amount = 0;...if (result == ERROR)amount = -1;...return amount;}",
+  "output": "This program snippet has a vulnerability.In this example the variable amount can hold a negative value when it is returned. Because the function is declared to return an unsigned int, amount will be implicitly converted to unsigned.If the error condition in the code above is met, then the return value of readdata() will be 4,294,967,295 on a system that uses 32-bit integers."
+}
+{
+  "input": "unsigned int readdata () {int amount = 0;...amount = accessmainframe();...return amount;}",
+  "output": "This program snippet has a vulnerability.In this example, depending on the return value of accecssmainframe(), the variable amount can hold a negative value when it is returned. Because the function is declared to return an unsigned value, amount will be implicitly cast to an unsigned number.If the return value of accessmainframe() is -1, then the return value of readdata() will be 4,294,967,295 on a system that uses 32-bit integers."
+}

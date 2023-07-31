@@ -1,0 +1,4 @@
+{
+  "input": "bool DoSecureStuff(HANDLE hPipe) {bool fDataWritten = false;ImpersonateNamedPipeClient(hPipe);HANDLE hFile = CreateFile(...);/../RevertToSelf()/../}",
+  "output": "This program snippet has a vulnerability.This code attempts to take on the privileges of a user before creating a file, thus avoiding performing the action with unnecessarily high privileges:The call to ImpersonateNamedPipeClient may fail, but the return value is not checked. If the call fails, the code may execute with higher privileges than intended. In this case, an attacker could exploit this behavior to write a file to a location that the attacker does not have access to."
+}

@@ -1,0 +1,4 @@
+{
+  "input": "void do_something_recursive (int flg)\n\t    {\n\n\t      ... // Do some real work here, but the value of flg is unmodified\n\t      if (flg) { do_something_recursive (flg); }    // flg is never modified so it is always TRUE - this call will continue until the stack explodes\n\n\t    }\n\t    int flag = 1; // Set to TRUE\n\t    do_something_recursive (flag);",
+  "output": "This program snippet has a vulnerability.In this example a mistake exists in the code where the exit condition contained in flg is never called. This results in the function calling itself over and over again until the stack is exhausted.\n          Note that the only difference between the Good and Bad examples is that the recursion flag will change value and cause the recursive call to return."
+}

@@ -1,0 +1,8 @@
+{
+  "input": "public int computeAverageResponseTime (int totalTime, int numRequests) {return totalTime / numRequests;}",
+  "output": "This program snippet has a vulnerability.The following Java example contains a function to compute an average but does not validate that the input value used as the denominator is not zero. This will create an exception for attempting to divide by zero. If this error is not handled by Java exception handling, unexpected results can occur.By validating the input value used as the denominator the following code will ensure that a divide by zero error will not cause unexpected results. The following Java code example will validate the input value, output an error message, and throw an exception."
+}
+{
+  "input": "double divide(double x, double y){return x/y;}",
+  "output": "This program snippet has a vulnerability.The following C/C++ example contains a function that divides two numeric values without verifying that the input value used as the denominator is not zero. This will create an error for attempting to divide by zero, if this error is not caught by the error handling capabilities of the language, unexpected results can occur.By validating the input value used as the denominator the following code will ensure that a divide by zero error will not cause unexpected results. If the method is called and a zero is passed as the second argument a DivideByZero error will be thrown and should be caught by the calling block with an output message indicating the error.Example 2 References:[REF-371] Alex Allain. \"Handling Errors Exceptionally Well in C++\". <https://www.cprogramming.com/tutorial/exceptions.html>. URL validated: 2023-04-07."
+}

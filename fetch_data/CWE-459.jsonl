@@ -1,0 +1,4 @@
+{
+  "input": "try {InputStream is = new FileInputStream(path);byte b[] = new byte[is.available()];is.read(b);is.close();} catch (Throwable t) {log.error(\"Something bad happened: \" + t.getMessage());}",
+  "output": "This program snippet has a vulnerability.Stream resources in a Java application should be released in a finally block, otherwise an exception thrown before the call to close() would result in an unreleased I/O resource. In the example below, the close() method is called in the try block (incorrect)."
+}

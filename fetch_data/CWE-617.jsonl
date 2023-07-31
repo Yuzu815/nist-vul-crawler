@@ -1,0 +1,4 @@
+{
+  "input": "String email = request.getParameter(\"email_address\");assert email != null;",
+  "output": "This program snippet has a vulnerability.In the excerpt below, an AssertionError (an unchecked exception) is thrown if the user hasn't entered an email address in an HTML form."
+}

@@ -1,0 +1,8 @@
+{
+  "input": "#include <stdio.h>#include <stdbool.h>main (void){int i;i = -2147483648;i = i - 1;return 0;}",
+  "output": "This program snippet has a vulnerability.The following example subtracts from a 32 bit signed integer.The example has an integer underflow. The value of i is already at the lowest negative value possible, so after subtracting 1, the new value of i is 2147483647."
+}
+{
+  "input": "int a = 5, b = 6;\n\t\t    size_t len = a - b;\n\t\t    char buf[len];    // Just blows up the stack\n\t\t  \n\t\t  }",
+  "output": "This program snippet has a vulnerability.This code performs a stack allocation based on a length calculation.Since a and b are declared as signed ints, the \"a - b\" subtraction gives a negative result (-1). However, since len is declared to be unsigned, len is cast to an extremely large positive number (on 32-bit systems - 4294967295). As a result, the buffer buf[len] declaration uses an extremely large size to allocate on the stack, very likely more than the entire computer's memory space.Miscalculations usually will not be so obvious. The calculation will either be complicated or the result of an attacker's input to attain the negative value."
+}
